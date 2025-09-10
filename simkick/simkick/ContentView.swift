@@ -85,8 +85,6 @@ struct ContentView: View {
 		.frame(width: 200, height: 600)
 }
 
-// TODO: add gh actions to build
-// TODO: host this somewhere
 // TODO: add to brew
 // TODO: add to sparkle
 
