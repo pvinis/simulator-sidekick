@@ -88,4 +88,5 @@ struct ContentView: View {
 // TODO: add gh actions to build
 // TODO: host this somewhere
 // TODO: add to brew
+// TODO: add to sparkle
 

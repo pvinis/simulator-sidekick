@@ -13,6 +13,8 @@ build:
         -scheme simkick \
         -configuration Release \
         -derivedDataPath build \
+        CODE_SIGN_IDENTITY="" \
+        CODE_SIGNING_REQUIRED=NO \
         clean build
 
 archive: build

@@ -1,4 +1,4 @@
-name: Build SimKick
+name: Archive SimKick
 
 on:
   push:
@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  archive:
+  Archive:
     runs-on: macos-latest
 
     steps:
