@@ -25,7 +25,7 @@ jobs:
       - name: Upload archive
         uses: actions/upload-artifact@v4
         with:
-          name: SimKick.zip
+          # name: SimKick
           path: SimKick.zip
           if-no-files-found: error
 
