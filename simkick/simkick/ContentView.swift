@@ -4,15 +4,15 @@ import SwiftUI
 struct ContentView: View {
     @StateObject private var state = SimulatorState()
 	@State private var refreshDebouncer = Debouncer(delay: 1.5)
-    
+
     var body: some View {
         VStack(spacing: 20) {
 			Text("Simulator Sidekick")
 				.font(.headline)
 				.padding(.top)
-			
+
 			Spacer()
-			
+
 			Button(action: {
 				SimulatorCommands.triggerFaceIDMatch()
 			}) {
@@ -31,18 +31,18 @@ struct ContentView: View {
 			}
 			.buttonStyle(PlainButtonStyle())
 			.help("Triggers Face ID matching face")
-			
+
             VStack(spacing: 12) {
                 HStack(spacing: 12) {
                     Image(systemName: state.appearance == .dark ? "moon.fill" : "sun.max.fill")
                         .font(.title2)
                         .foregroundColor(.orange)
-                    
+
                     Text("Dark Mode")
                         .font(.subheadline)
-                    
+
                     Spacer()
-                    
+
                     Toggle("", isOn: Binding(
                         get: { state.isDarkMode },
                         set: { newValue in
@@ -64,9 +64,9 @@ struct ContentView: View {
 				)
 			}
 			.help("Toggle simulator appearance between dark and light mode")
-			
+
 			Spacer()
-			
+
             Text("more tools here")
         }
         .padding()
