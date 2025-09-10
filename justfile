@@ -17,6 +17,9 @@ build:
         CODE_SIGNING_REQUIRED=NO \
         clean build
 
+sign:
+    ./scripts/sign.sh
+
 archive: build
     cp -r simkick/build/Build/Products/Release/SimKick.app .
     zip -r SimKick.zip SimKick.app
