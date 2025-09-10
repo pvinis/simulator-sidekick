@@ -18,5 +18,7 @@ build:
         clean build
 
 archive: build
-    zip -r SimKick.zip simkick/build/Build/Products/Release/SimKick.app
+    cp -r simkick/build/Build/Products/Release/SimKick.app .
+    zip -r SimKick.zip SimKick.app
+    rm -rf SimKick.app
     @echo "Archive created: SimKick.zip"
