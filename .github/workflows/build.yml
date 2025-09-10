@@ -8,55 +8,26 @@ on:
   workflow_dispatch:
 
 jobs:
-  macos-build:
+  archive:
     runs-on: macos-latest
 
     steps:
       - uses: actions/checkout@v4
 
-      # - name: Select Xcode version
-      #   run: sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
+      - uses: extractions/setup-just@v3
 
       - name: Print Xcode version
         run: xcodebuild -version
 
-      - name: Build for Debug
-        run: xcodebuild -scheme simkick -configuration Debug -destination "platform=macOS,arch=arm64" build
+      - name: Archive
+        run: just archive
 
-      - name: Build for Release
-        run: xcodebuild -scheme simkick -configuration Release -destination "platform=macOS,arch=arm64" build
-
-      - name: Archive Release build
-        run: |
-          mkdir -p build
-          xcodebuild -scheme simkick -configuration Release -destination "platform=macOS,arch=arm64" -archivePath ./build/SimKick.xcarchive archive
-
-      - name: Export app
-        run: xcodebuild -exportArchive -archivePath ./build/SimKick.xcarchive -exportPath ./build/export -exportOptionsPlist ./export-options.plist
-        continue-on-error: true
-
-      - name: Archive build
+      - name: Upload archive
         uses: actions/upload-artifact@v4
-        if: always()
         with:
-          name: simkick-builds
-          path: |
-            build/
-          retention-days: 30
-
-    # steps:
-
-    # - name: Build and test
-    #   # env:
-    #     # SPARKLE_PRIVATE_KEY_BASE64: ${{ secrets.SPARKLE_PRIVATE_KEY_BASE64 }}
-    #     # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    #     # RELEASE: ${{ github.ref == 'refs/heads/main' }}
-
-    # - name: Archive binary
-    #   uses: actions/upload-artifact@v4
-    #   with:
-    #     path: build/build-*.zip
-    #     if-no-files-found: error
+          name: SimKick-app
+          path: SimKick.zip
+          if-no-files-found: error
 
   # sparkle-update:
   #   needs: macos-build
