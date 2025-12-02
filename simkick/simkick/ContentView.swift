@@ -3,7 +3,8 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject private var state = SimulatorState()
-	@State private var refreshDebouncer = Debouncer(delay: 1.5)
+    @StateObject private var attachmentSettings = AttachmentSettings.shared
+    @State private var refreshDebouncer = Debouncer(delay: 1.5)
 
     var body: some View {
         VStack(spacing: 20) {
@@ -67,7 +68,32 @@ struct ContentView: View {
 
 			Spacer()
 
-            Text("more tools here")
+            VStack(spacing: 12) {
+                HStack(spacing: 12) {
+                    Image(systemName: "rectangle.connected.to.line.below")
+                        .font(.title2)
+                        .foregroundColor(.purple)
+
+                    Text("Attach Side")
+                        .font(.subheadline)
+
+                    Spacer()
+
+                    Picker("", selection: $attachmentSettings.side) {
+                        Text("Left").tag(AttachmentSide.left)
+                        Text("Right").tag(AttachmentSide.right)
+                    }
+                    .pickerStyle(.segmented)
+                    .frame(width: 100)
+                }
+                .padding()
+                .background(
+                    RoundedRectangle(cornerRadius: 12)
+                        .fill(Color.purple.opacity(0.1))
+                        .stroke(Color.purple, lineWidth: 1)
+                )
+            }
+            .help("Choose which side of the simulator to attach to")
         }
         .padding()
         .frame(maxWidth: .infinity, maxHeight: .infinity)
